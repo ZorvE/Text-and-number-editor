@@ -26,6 +26,7 @@ def text_get():
     the_text = text_Window.get(1.0, "end")
     text_file = open("text_source.txt", "w")
     text_file.write(the_text)
+    print("New branch!")
 
 
 
