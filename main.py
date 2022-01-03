@@ -35,8 +35,10 @@ def text_import():
     text_reading.close()
 
 
-#def rng_sum_set_to_0():
-
+def rng_sum_set_to_0():
+    global rng_sum
+    rng_sum = 0
+    label_Text.set("The sum of the random numbers is: " + str(rng_sum))
 
 label_Text = tk.StringVar()
 label_Text.set("The sum of the random numbers will appear here.")
@@ -45,8 +47,8 @@ rng_Label.pack()
 rng_Button = tk.Button(root, text="Generate random numbers", command=rng_generate)
 rng_Button.pack()
 
-#rng_Button_Clear = tk.Button(root, text="Clear the sum of the random numbers *not yet working*", command=rng_sum_set_to_0)
-#rng_Button_Clear.pack()
+rng_Button_Clear = tk.Button(root, text="Clear the sum of the random numbers", command=rng_sum_set_to_0)
+rng_Button_Clear.pack()
 
 text_Window = tk.Text(root)
 text_Window.pack()
