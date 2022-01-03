@@ -4,7 +4,7 @@ import random as rng
 rng_sum = 0
 
 root = tk.Tk()
-root.geometry("400x500")
+root.geometry("400x600")
 root.title("Text and number editor")
 
 
@@ -22,20 +22,31 @@ def text_clear():
     text_Window.delete(1.0, "end")
 
 # printing the whats is in the text box on the commandline
-def text_get():
+def text_save():
     the_text = text_Window.get(1.0, "end")
     text_file = open("text_source.txt", "w")
     text_file.write(the_text)
-    print("New branch!")
+    print("Text saved!")
+    text_file.close()
 
+def text_import():
+    text_reading = open("text_source.txt", "r")
+    text_Window.insert(1.0, text_reading.read())
+    text_reading.close()
+
+
+#def rng_sum_set_to_0():
 
 
 label_Text = tk.StringVar()
 label_Text.set("The sum of the random numbers will appear here.")
 rng_Label = tk.Label(root, textvariable=label_Text)
 rng_Label.pack()
-rng_Button = tk.Button(root, text="Generate number", command=rng_generate)
+rng_Button = tk.Button(root, text="Generate random numbers", command=rng_generate)
 rng_Button.pack()
+
+#rng_Button_Clear = tk.Button(root, text="Clear the sum of the random numbers *not yet working*", command=rng_sum_set_to_0)
+#rng_Button_Clear.pack()
 
 text_Window = tk.Text(root)
 text_Window.pack()
@@ -43,7 +54,10 @@ text_Window.pack()
 clear_Button = tk.Button(text="Clear text", command=text_clear)
 clear_Button.pack()
 
-get_Button = tk.Button(text="Get text", command=text_get)
-get_Button.pack()
+save_Button = tk.Button(text="Save text", command=text_save)
+save_Button.pack()
+
+import_Button = tk.Button(text="Import text", command=text_import)
+import_Button.pack()
 
 root.mainloop()
