@@ -2,6 +2,7 @@ import tkinter as tk
 import random as rng
 
 rng_sum = 0
+statisticsWindowOpen = False
 
 root = tk.Tk()
 root.geometry("400x600")
@@ -15,7 +16,6 @@ def rng_generate():
     rng_sum = rng_sum + rng_number
     label_Text.set("The sum of the random numbers is: " + str(rng_sum))
     text_Window.insert(1.0, str(rng_number) + "\n")
-
 
 # clears the text window
 def text_clear():
@@ -34,11 +34,30 @@ def text_import():
     text_Window.insert(1.0, text_reading.read())
     text_reading.close()
 
-
 def rng_sum_set_to_0():
     global rng_sum
     rng_sum = 0
     label_Text.set("The sum of the random numbers is: " + str(rng_sum))
+
+def extract_numbers():
+    text_From_Window = text_Window.get(1.0, "end")
+    print(text_From_Window)
+    for symbols in text_From_Window:
+        print("Stuff!")
+
+def statisticsWindow():
+    global statisticsWindowOpen
+    if statisticsWindowOpen == False:
+        statisticsWindowOpen = True
+        statisticsWindow = tk.Toplevel()
+        statisticsWindow.title("Number statistics")
+        statisticsWindow.geometry("400x400")
+        statisticsWindow.protocol("WM_DELETE_WINDOW", lambda: statisticsWindowClosing(statisticsWindow))
+
+def statisticsWindowClosing(win):
+    global statisticsWindowOpen
+    statisticsWindowOpen = False
+    win.destroy()
 
 label_Text = tk.StringVar()
 label_Text.set("The sum of the random numbers will appear here.")
@@ -61,5 +80,14 @@ save_Button.pack()
 
 import_Button = tk.Button(text="Import text", command=text_import)
 import_Button.pack()
+
+extract_Button = tk.Button(text="Extract numbers", command=extract_numbers)
+extract_Button.pack()
+
+statisticsButton = tk.Button(text="Number statistics", command=statisticsWindow)
+statisticsButton.pack()
+
+#soring out numbers from text
+extracted_numbers = []
 
 root.mainloop()
