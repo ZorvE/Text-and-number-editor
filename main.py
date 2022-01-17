@@ -42,8 +42,8 @@ def rng_sum_set_to_0():
 def extract_numbers():
     text_From_Window = text_Window.get(1.0, "end")
     print(text_From_Window)
-    for symbols in text_From_Window:
-        print("Stuff!")
+    for symbol in text_From_Window:
+        print(symbol, symbol.isdigit())
 
 def statisticsWindow():
     global statisticsWindowOpen
